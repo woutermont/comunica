@@ -67,6 +67,6 @@
   },
   "dependencies": {
     "canonicalize": "^1.0.1",
-    "rdf-string": "^1.4.2"
+    "rdf-string": "^1.5.0"
   }
 }

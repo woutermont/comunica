@@ -18,11 +18,16 @@
           "defaultScoped": {
             "defaultScope": "crpn3:Actor/RdfParse/N3",
             "defaultScopedValue": [
-              { "mediaTypeKey": "application/n-quads",   "priorityValue": "1.0",  "mediaTypeFormat": "http://www.w3.org/ns/formats/N-Quads" },
-              { "mediaTypeKey": "application/trig",      "priorityValue": "0.95", "mediaTypeFormat": "http://www.w3.org/ns/formats/TriG" },
-              { "mediaTypeKey": "application/n-triples", "priorityValue": "0.8",  "mediaTypeFormat": "http://www.w3.org/ns/formats/N-Triples" },
-              { "mediaTypeKey": "text/turtle",           "priorityValue": "0.5",  "mediaTypeFormat": "http://www.w3.org/ns/formats/Turtle" },
-              { "mediaTypeKey": "text/n3",               "priorityValue": "0.35", "mediaTypeFormat": "http://www.w3.org/ns/formats/N3" }
+              { "mediaTypeKey": "application/n-quads",          "priorityValue": "1.0",  "mediaTypeFormat": "http://www.w3.org/ns/formats/N-Quads" },
+              { "mediaTypeKey": "application/trig",             "priorityValue": "0.95", "mediaTypeFormat": "http://www.w3.org/ns/formats/TriG" },
+              { "mediaTypeKey": "application/n-triples",        "priorityValue": "0.8",  "mediaTypeFormat": "http://www.w3.org/ns/formats/N-Triples" },
+              { "mediaTypeKey": "text/turtle",                  "priorityValue": "0.5",  "mediaTypeFormat": "http://www.w3.org/ns/formats/Turtle" },
+              { "mediaTypeKey": "text/n3",                      "priorityValue": "0.35", "mediaTypeFormat": "http://www.w3.org/ns/formats/N3" },
+              { "mediaTypeKey": "application/x-n-quads-star",   "priorityValue": "1.0",  "mediaTypeFormat": "https://comunica.dev/#results_n-quads-star" },
+              { "mediaTypeKey": "application/x-trig-star",      "priorityValue": "0.95", "mediaTypeFormat": "https://comunica.dev/#results_trig-star" },
+              { "mediaTypeKey": "application/x-n-triples-star", "priorityValue": "0.8",  "mediaTypeFormat": "https://comunica.dev/#results_n-triples-star" },
+              { "mediaTypeKey": "text/x-turtle-star",           "priorityValue": "0.5",  "mediaTypeFormat": "https://comunica.dev/#results_turtle-star" },
+              { "mediaTypeKey": "text/x-n3-star",               "priorityValue": "0.35", "mediaTypeFormat": "https://comunica.dev/#results_n3-star" }
             ]
           }
         }

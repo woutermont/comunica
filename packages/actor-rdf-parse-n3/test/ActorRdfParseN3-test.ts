@@ -1,9 +1,13 @@
 import { Readable } from 'stream';
 import { ActorRdfParseFixedMediaTypes } from '@comunica/bus-rdf-parse';
 import { Bus } from '@comunica/core';
+import { DataFactory } from 'rdf-data-factory';
 import { ActorRdfParseN3 } from '../lib/ActorRdfParseN3';
 const arrayifyStream = require('arrayify-stream');
 const stringToStream = require('streamify-string');
+import 'jest-rdf';
+
+const DF = new DataFactory();
 
 describe('ActorRdfParseN3', () => {
   let bus: any;
@@ -62,7 +66,10 @@ describe('ActorRdfParseN3', () => {
   describe('An ActorRdfParseN3 instance', () => {
     let actor: ActorRdfParseN3;
     let input: Readable;
+    let inputTtl: Readable;
+    let inputTrig: Readable;
     let inputError: Readable;
+    let inputTtlStar: Readable;
 
     beforeEach(() => {
       actor = new ActorRdfParseN3({ bus,
@@ -82,12 +89,24 @@ describe('ActorRdfParseN3', () => {
           <a> <b> <c>.
           <d> <e> <f> <g>.
       `);
+        inputTtl = stringToStream(`
+          <a> <b> <c>.
+          <d> <e> <f>.
+      `);
+        inputTrig = stringToStream(`
+          <a> <b> <c>.
+          <g> { <d> <e> <f>. }
+      `);
+        inputTtlStar = stringToStream(`
+          <<<a> <b> <c>>> <b> <c>.
+          <d> <e> <f>.
+      `);
         inputError = new Readable();
         inputError._read = () => inputError.emit('error', new Error());
       });
 
       it('should test on TriG', () => {
-        return expect(actor.test({ handle: { input, baseIRI: '' }, handleMediaType: 'application/trig' }))
+        return expect(actor.test({ handle: { input: inputTrig, baseIRI: '' }, handleMediaType: 'application/trig' }))
           .resolves.toBeTruthy();
       });
 
@@ -97,7 +116,7 @@ describe('ActorRdfParseN3', () => {
       });
 
       it('should test on Turtle', () => {
-        return expect(actor.test({ handle: { input, baseIRI: '' }, handleMediaType: 'text/turtle' }))
+        return expect(actor.test({ handle: { input: inputTtl, baseIRI: '' }, handleMediaType: 'text/turtle' }))
           .resolves.toBeTruthy();
       });
 
@@ -112,13 +131,25 @@ describe('ActorRdfParseN3', () => {
       });
 
       it('should run on text/turtle', () => {
-        return actor.run({ handle: { input, baseIRI: '' }, handleMediaType: 'text/turtle' })
+        return actor.run({ handle: { input: inputTtl, baseIRI: '' }, handleMediaType: 'text/turtle' })
           .then(async(output: any) => expect(await arrayifyStream(output.handle.quads)).toHaveLength(2));
       });
 
       it('should run on application/trig', () => {
-        return actor.run({ handle: { input, baseIRI: '' }, handleMediaType: 'application/trig' })
+        return actor.run({ handle: { input: inputTrig, baseIRI: '' }, handleMediaType: 'application/trig' })
           .then(async(output: any) => expect(await arrayifyStream(output.handle.quads)).toHaveLength(2));
+      });
+
+      it('should run on text/x-turtle-star', () => {
+        return actor.run({ handle: { input: inputTtlStar, baseIRI: '' }, handleMediaType: 'text/x-turtle-star' })
+          .then(async(output: any) => expect(await arrayifyStream(output.handle.quads)).toEqualRdfQuadArray([
+            DF.quad(
+              DF.quad(DF.namedNode('a'), DF.namedNode('b'), DF.namedNode('c')),
+              DF.namedNode('b'),
+              DF.namedNode('c'),
+            ),
+            DF.quad(DF.namedNode('d'), DF.namedNode('e'), DF.namedNode('f')),
+          ]));
       });
 
       it('should forward stream errors', async() => {

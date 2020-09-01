@@ -37,10 +37,10 @@
   "dependencies": {
     "@comunica/actor-rdf-resolve-quad-pattern-sparql-json": "^1.16.0",
     "@rdfjs/data-model": "^1.1.1",
-    "@types/rdf-js": "^3.0.0",
+    "@types/rdf-js": "*",
     "asynciterator": "^3.0.1",
     "rdf-terms": "^1.4.0",
-    "sparqlalgebrajs": "^2.3.2"
+    "sparqlalgebrajs": "^2.4.0"
   },
   "peerDependencies": {
     "@comunica/bus-rdf-resolve-hypermedia": "^1.8.0",

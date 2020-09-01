@@ -16,6 +16,7 @@
     "@rdfjs/data-model": "^1.1.1",
     "@types/asynciterator": "^1.1.4",
     "@types/jest": "^26.0.0",
+    "@types/n3": "^1.4.4",
     "@types/node": "^13.1.7",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
     "@typescript-eslint/parser": "^2.33.0",
@@ -37,10 +38,11 @@
     "lerna": "^3.4.0",
     "manual-git-changelog": "^1.0.0",
     "pre-commit": "^1.2.2",
-    "rdf-quad": "^1.4.0",
+    "rdf-data-factory": "^1.0.1",
+    "rdf-quad": "^1.5.0",
     "rdf-test-suite": "^1.13.4",
     "rdf-test-suite-ldf": "^1.1.5",
-    "sparqlalgebrajs": "^2.3.2",
+    "sparqlalgebrajs": "^2.4.0",
     "stream-to-string": "^1.1.0",
     "streamify-array": "^1.0.0",
     "streamify-string": "^1.0.1",
@@ -104,6 +106,6 @@
     "version": "manual-git-changelog onversion"
   },
   "resolutions": {
-    "@types/rdf-js": "3.0.3"
+    "@types/rdf-js": "4.0.0"
   }
 }

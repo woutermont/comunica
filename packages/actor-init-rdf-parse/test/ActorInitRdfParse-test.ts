@@ -62,7 +62,7 @@ describe('ActorInitRdfParse', () => {
         name: 'actor-rdf-parse' }));
       input = stringToStream(`
       <a> <b> <c>.
-      <d> <e> <f> <g>.
+      <d> <e> <f>.
       `);
     });
 
@@ -92,7 +92,7 @@ describe('ActorInitRdfParse', () => {
         .then(async output => {
           return expect((await arrayifyStream(output.stdout)).map((b: any) => JSON.parse(b.toString()))).toEqual([
             { subject: 'x:a', predicate: 'x:b', object: 'x:c', graph: '' },
-            { subject: 'x:d', predicate: 'x:e', object: 'x:f', graph: 'x:g' },
+            { subject: 'x:d', predicate: 'x:e', object: 'x:f', graph: '' },
           ]);
         });
     });
